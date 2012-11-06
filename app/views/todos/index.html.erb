@@ -1,0 +1,21 @@
+<h3>Your Todos</h3>
+<% if @todos.any? -%>
+<ol class='todos'>
+  <% @todos.each do |todo| %>
+    <li>
+      <span><%= todo.title %></span>
+      <span>
+        <%= form_tag( completed_todo_path(todo.uuid) ) do -%>
+          <%= submit_tag "done" %>
+        <% end -%>
+      </span>
+    </li>
+  <% end -%>
+</ol>
+<% else -%>
+  <p>You currently have <strong>no</strong> todos.</p>
+<% end -%>
+<%= simple_form_for @todo, as: :todo, url: todos_path do |form| %>
+  <%= form.input :title %>
+  <%= form.button :submit, "Add Todo" %>
+<% end %>

@@ -1,0 +1,7 @@
+<%= simple_form_for @registration, as: :registration, url: registrations_path, html: { class: '.form-horizontal' } do |form| -%>
+  <h3>Sign Up</h3>
+  <%= form.input :email %>
+  <%= form.input :password %>
+  <%= form.button :submit, "Sign Up" %>
+<% end -%>
+<# TODO: might move this to the signin page, and have two forms: one for registration and one for signins >
