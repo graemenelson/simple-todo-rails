@@ -20,9 +20,12 @@ group :assets do
 end
 
 gem 'virtus'
-gem 'simple-todo', git: 'git://github.com/graemenelson/simple-todo'
+#gem 'simple-todo', git: 'git://github.com/graemenelson/simple-todo'
+gem 'simple-todo', path: '/Users/graemenelson/Clients/swellapps/code/simple-todo'
 gem 'valid_email'
 gem 'simple_form'
+
+gem 'sqlite3-ruby', :require => 'sqlite3'
 
 
 # To use ActiveModel has_secure_password

@@ -41,6 +41,7 @@ class TodosControllerTest < ActionController::TestCase
     sign_in( person )
     post :create, todo: { title: "my todo" }
     assert_redirected_to todos_path
+    person = SimpleTodo::Repository.for( :person ).find_by_uuid( person.uuid )
     assert_equal 1, person.todos.size, "person should have one todo"
   end
   
@@ -64,11 +65,14 @@ class TodosControllerTest < ActionController::TestCase
     todo = Todo.new( uuid: SecureRandom.uuid )
     person = create_person
     person.add_todo( todo )
+    SimpleTodo::Repository.for( :person ).save( person )
     sign_in( person )
     post :completed, id: todo.uuid
     assert_redirected_to todos_path
-    assert person.todos.include?( todo ), "person should still have todo"
-    assert todo.completed_at, "todo should have completed at time"
+    person = SimpleTodo::Repository.for( :person ).find_by_uuid( person.uuid )
+    todo   = person.todos.first
+    assert_equal 1, person.todos.size, "person should have 1 todo"
+    assert todo.completed?, "todo should be completed"
   end
 
 end
